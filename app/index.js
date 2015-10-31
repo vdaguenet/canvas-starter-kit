@@ -7,7 +7,7 @@ const scene = new Scene(canvas, window.innerWidth, window.innerHeight);
 
 // GUI settings
 const gui = new dat.GUI();
-gui.add(scene.params, 'animate');
+// gui.add(scene.params, '');
 
 // handle resize
 window.addEventListener('resize', resizeHandler);

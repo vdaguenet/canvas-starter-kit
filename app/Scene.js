@@ -8,12 +8,12 @@ export default class Scene {
     this.width = 0;
     this.height = 0;
 
-    this.params = {
-      animate: true,
-    };
-    this.tick = 0;
+    this.params = {};
 
-    this.particleContainer = new ParticleContainer(40, width, height);
+    this.tick = 0;
+    this.lastTime = 0;
+
+    this.particleContainer = new ParticleContainer(20, width, height);
 
     this.resize(width, height);
   }
@@ -27,12 +27,14 @@ export default class Scene {
   }
 
   render() {
-    if (this.params.animate) {
-      this.tick += 0.02;
-    }
+    const now = Date.now();
+    const elapsed = (now - this.lastTime) / 1000;
+
+    this.tick += elapsed;
 
     this.context.clearRect(0, 0, this.width, this.height);
+    this.particleContainer.update(this.context, this.tick);
 
-    this.particleContainer.update(this.context, this.tick, this.params.animate);
+    this.lastTime = now;
   }
 }

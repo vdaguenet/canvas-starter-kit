@@ -24,6 +24,7 @@ export default class ParticleContainer {
       y = 0.5 * this.height + Math.sin(angle) * 150;
 
       p = new Particle(x, y);
+      p.color = '#fff';
       this.pool.push(p);
     }
   }
@@ -33,12 +34,10 @@ export default class ParticleContainer {
     this.height = height;
   }
 
-  update(context, tick, animate) {
+  update(context, tick) {
     this.pool.forEach((particle, i) => {
-      if (animate) {
-        particle.scale = Math.abs(Math.sin(tick + i / this.nbParticle));
-        particle.update();
-      }
+      particle.scale = Math.abs(Math.cos(tick + i / this.nbParticle));
+      particle.update();
       particle.draw(context);
     });
   }
