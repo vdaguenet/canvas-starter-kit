@@ -1,5 +1,4 @@
 import Particle from '../lib/Particle';
-import { clamp } from '../lib/math';
 
 export default class ParticleContainer {
   constructor(nbParticle, width, height) {
@@ -7,6 +6,9 @@ export default class ParticleContainer {
     this.height = height;
     this.nbParticle = nbParticle;
     this.pool = [];
+    this.angles = [];
+    this.slice = 0;
+    this.speed = 0.01;
 
     this.populate();
   }
@@ -16,16 +18,17 @@ export default class ParticleContainer {
     let x;
     let y;
     let angle = 0;
-    const slice = 2 * Math.PI / this.nbParticle;
+    this.slice = 2 * Math.PI / this.nbParticle;
 
     for (let i = 0; i < this.nbParticle; i++) {
-      angle = slice * i;
+      angle = this.slice * i;
       x = 0.5 * this.width + Math.cos(angle) * 150;
       y = 0.5 * this.height + Math.sin(angle) * 150;
 
       p = new Particle(x, y);
       p.color = '#fff';
       this.pool.push(p);
+      this.angles[i] = angle;
     }
   }
 
@@ -36,7 +39,10 @@ export default class ParticleContainer {
 
   update(context, tick) {
     this.pool.forEach((particle, i) => {
-      particle.scale = Math.abs(Math.cos(tick + i / this.nbParticle));
+      this.angles[i] += this.speed;
+      particle.position.x = 0.5 * this.width + Math.cos(this.angles[i]) * 150;
+      particle.position.y = 0.5 * this.height + Math.sin(this.angles[i]) * 150;
+
       particle.update();
       particle.draw(context);
     });

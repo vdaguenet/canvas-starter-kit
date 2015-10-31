@@ -7,7 +7,7 @@ const scene = new Scene(canvas, window.innerWidth, window.innerHeight);
 
 // GUI settings
 const gui = new dat.GUI();
-// gui.add(scene.params, '');
+gui.add(scene.particleContainer, 'speed').min(-5).max(5);
 
 // handle resize
 window.addEventListener('resize', resizeHandler);
