@@ -19,13 +19,14 @@
   },
   "homepage": "https://github.com/vdaguenet/canvas-starter-kit#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-plugin-transform-es2015-modules-commonjs": "*",
-    "babel-preset-es2015": "*",
+    "babel-preset-env": "*",
     "babelify": "*",
     "browserify": "*",
     "budo": "*",
     "stripify": "*",
-    "uglifyjs": "*"
+    "uglify-js": "*"
   },
   "dependencies": {
     "dat-gui": "*",
